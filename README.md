@@ -7,7 +7,6 @@ Treason FPS config
 Place in C:\Program Files (x86)\Steam\steamapps\common\Treason\treason\cfg
 
 Optional launch options: -novid -nojoy -nosteamcontroller -particles 1
-(warning: using dxlevel 80 reduces alt tab stability)
 
 Credits
 Chris' maxframes as a base for the config itself.
