@@ -50,14 +50,6 @@ fps_max 0
 
 This leaves the framerate uncapped for maximum throughput and minimum engine-side frame limiting. If you would rather reduce GPU usage, heat, or fan noise, replace `0` with your preferred cap.
 
-## Treason-specific graphics notes
-
-The original config used `mat_picmip 0` because more aggressive texture-detail values had caused visual problems in Treason. That conservative value is retained.
-
-Treason also previously had a game-side bug where lower texture/shader settings could cause missing textures. The developers later fixed the low-settings issue, but texture detail is not a major performance target in this config, so v1.0 avoids forcing an extreme `mat_picmip` value.
-
-`r_rootlod 0` is also retained because the original config documented visual issues when changing the root model LOD. Instead, `r_lod 2` is used to request a lower active model LOD where the game allows it.
-
 ## Troubleshooting
 
 ### The config does not load
