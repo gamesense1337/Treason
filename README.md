@@ -50,21 +50,6 @@ fps_max 0
 
 This leaves the framerate uncapped for maximum throughput and minimum engine-side frame limiting. If you would rather reduce GPU usage, heat, or fan noise, replace `0` with your preferred cap.
 
-## Network settings
-
-Unlike a purely graphical preset, the original Treason config also contained a small client networking block. v1.0 preserves the useful parts of it:
-
-```text
-cl_interp_ratio 2
-cl_pred_optimize 2
-cl_timeout 60
-net_maxpacketdrop 0
-```
-
-The old `net_chokeloop 1` and `sv_lan 1` settings were removed. `net_chokeloop` affects loopback packet choking and is not a performance optimization, while `sv_lan` changes server/LAN behavior and does not belong in a client FPS config.
-
-The old commented `cl_interp 0.100000` value remains commented out so the config does not silently force a fixed interpolation time.
-
 ## Treason-specific graphics notes
 
 The original config used `mat_picmip 0` because more aggressive texture-detail values had caused visual problems in Treason. That conservative value is retained.
