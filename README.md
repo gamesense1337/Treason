@@ -2,7 +2,7 @@
 
 An aggressive FPS-focused `autoexec.cfg` for **Treason**.
 
-This config is intended for players who care more about framerate and frame-time consistency than visual quality. It reduces or disables shadows, ragdolls, physics props, gibs, decals, ropes, water effects, model effects, and several material features while preserving the useful network settings from the original config.
+This config is intended for players who care more about framerate and frame-time consistency than visual quality. It disables or reduces shadows, smoke, ragdolls, physics props, decals, model detail, water effects, and several material effects.
 
 ## Installation
 
