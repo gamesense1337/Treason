@@ -1,12 +1,114 @@
-# Treason
+# Treason Maxframes Config
 
-<a href="https://theresalwaysalighthouse.com"><img src="https://img.shields.io/static/v1?label=Powered+By&message=Weed&color=2ea44f&style=for-the-badge&logo=%3Csvg+role%3D%22img%22+viewBox%3D%220+0+24+24%22+xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3ELeaflet%3C%2Ftitle%3E%3Cpath+d%3D%22M17.69+0c-.355.574-8.432+4.74-10.856+8.649-2.424+3.91-3.116+6.988-2.237+9.882.879+2.893+2.559+2.763+3.516+3.717.958.954+2.257+2.113+4.332+1.645+2.717-.613+5.335-2.426+6.638-7.508+1.302-5.082.448-9.533-.103-11.99A35.395+35.395+0+0+0+17.69+0zm-.138.858l-9.22+21.585-.574-.577Z%22%2F%3E%3C%2Fsvg%3E&logoColor=%23199900" alt="Powered By - Weed"></a>
+An aggressive FPS-focused `autoexec.cfg` for **Treason**.
 
-Treason FPS config
+This config is intended for players who care more about framerate and frame-time consistency than visual quality. It reduces or disables shadows, ragdolls, physics props, gibs, decals, ropes, water effects, model effects, and several material features while preserving the useful network settings from the original config.
 
-Place in C:\Program Files (x86)\Steam\steamapps\common\Treason\treason\cfg
+## Installation
 
-Optional launch options: -novid -nojoy -nosteamcontroller -particles 1
+1. Download `autoexec.cfg`.
+2. Place it in your Treason config folder:
 
-Credits
-Chris' maxframes as a base for the config itself.
+   ```text
+   C:\Program Files (x86)\Steam\steamapps\common\Treason\treason\cfg
+   ```
+
+   If your Steam library is installed somewhere else, use the equivalent `steamapps\common\Treason\treason\cfg` folder in that library.
+
+3. In Steam, open **Treason -> Properties -> General -> Launch Options**.
+4. Recommended launch options:
+
+   ```text
+   -novid -nojoy -nosteamcontroller -particles 1
+   ```
+
+5. Launch the game. The console will print:
+
+   ```text
+   ReD's Maxframes config loaded.
+   ```
+
+## Launch options
+
+The config keeps the original lightweight launch options:
+
+```text
+-novid -nojoy -nosteamcontroller -particles 1
+```
+
+`-novid` skips the startup video, while `-nojoy` and `-nosteamcontroller` avoid initializing controller-related support when it is not needed.
+
+Source uses `-particles` to control the maximum number of beam trails. The engine has a minimum value, so `-particles 1` effectively requests the lowest supported limit rather than literally allowing one trail. If you notice missing or undesirable tracer/beam effects, remove `-particles 1` first.
+
+## FPS cap
+
+The config uses:
+
+```text
+fps_max 0
+```
+
+This leaves the framerate uncapped for maximum throughput and minimum engine-side frame limiting. If you would rather reduce GPU usage, heat, or fan noise, replace `0` with your preferred cap.
+
+## Network settings
+
+Unlike a purely graphical preset, the original Treason config also contained a small client networking block. v1.0 preserves the useful parts of it:
+
+```text
+cl_interp_ratio 2
+cl_pred_optimize 2
+cl_timeout 60
+net_maxpacketdrop 0
+```
+
+The old `net_chokeloop 1` and `sv_lan 1` settings were removed. `net_chokeloop` affects loopback packet choking and is not a performance optimization, while `sv_lan` changes server/LAN behavior and does not belong in a client FPS config.
+
+The old commented `cl_interp 0.100000` value remains commented out so the config does not silently force a fixed interpolation time.
+
+## Treason-specific graphics notes
+
+The original config used `mat_picmip 0` because more aggressive texture-detail values had caused visual problems in Treason. That conservative value is retained.
+
+Treason also previously had a game-side bug where lower texture/shader settings could cause missing textures. The developers later fixed the low-settings issue, but texture detail is not a major performance target in this config, so v1.0 avoids forcing an extreme `mat_picmip` value.
+
+`r_rootlod 0` is also retained because the original config documented visual issues when changing the root model LOD. Instead, `r_lod 2` is used to request a lower active model LOD where the game allows it.
+
+## Troubleshooting
+
+### The config does not load
+
+Make sure the filename is exactly:
+
+```text
+autoexec.cfg
+```
+
+and that Windows did not save it as `autoexec.cfg.txt`.
+
+You can also open the developer console and run:
+
+```text
+exec autoexec
+```
+
+If the config loads successfully, the banner should be printed in the console.
+
+### A command is reported as unknown
+
+Treason is a customized Source-engine game and does not necessarily expose every cvar found in other Source branches. If the console reports an unknown command, include the exact command/error when reporting it so the config can be corrected without guessing.
+
+### Something looks broken
+
+First remove `-particles 1` from the launch options if tracer or beam effects are missing. For model or texture problems, temporarily comment out `r_lod 2` or `mat_picmip 0` and restart the game.
+
+### I want better graphics back
+
+Remove or rename `autoexec.cfg`, restart Treason, and restore your preferred video settings from the in-game options menu. Some material/video settings may require a restart or map reload before the change is fully visible.
+
+## Credits
+
+- Valve / Source community documentation — useful for validating old Source-engine cvars and removing outdated tweaks.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
